@@ -1,6 +1,7 @@
 from selenium import webdriver
 from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.common.by import By
+from selenium.common.exceptions import NoSuchElementException
 from selenium.webdriver.common.keys import Keys
 import os
 import time
@@ -72,4 +73,26 @@ print("switch back to base_window")
 driver.switch_to.window(base_window)
 time.sleep(3)
 # print(driver.title)
+
+
+# allow tinder to access my location
+print("allow tinder to access my location")
+time.sleep(3)
+try:
+    allow_location_button = driver.find_element(By.XPATH, "//*[@id='q1979629556']/main/div/div/div/div[3]/button[1]/div[2]/div[2]")
+except NoSuchElementException:
+    print("tinder is not asking for my location")
+else:
+    allow_location_button.click()
+
+# dismiss notifications
+print("dismiss notifications")
+time.sleep(3)
+try:
+    dismiss_notifications_button = driver.find_element(By.XPATH, "//*[@id='q1979629556']/main/div/div/div/div[3]/button[1]/div[2]/div[2]")
+except NoSuchElementException:
+    print("tinder is not asking to allow notifications")
+else:
+    dismiss_notifications_button.click()
+
 
