@@ -1,16 +1,17 @@
-# This is a sample Python script.
+from selenium import webdriver
+from selenium.webdriver.chrome.service import Service
+from selenium.webdriver.common.by import By
+from selenium.webdriver.common.keys import Keys
+import os
+import time
 
-# Press Maj+F10 to execute it or replace it with your code.
-# Press Double Shift to search everywhere for classes, files, tool windows, actions, and settings.
+FACEBOOK_USERNAME = os.environ["FACEBOOK_USERNAME"]
+FACEBOOK_PASSWORD = os.environ["FACEBOOK_PASSWORD"]
+CHROME_DRIVER_PATH = os.environ["CHROME_DRIVER_PATH"]
+# chrome_driver_path = r"C:\Users\Utilisateur1\Development\chromedriver.exe"
+service = Service(CHROME_DRIVER_PATH)
+options = webdriver.ChromeOptions()
+options.add_experimental_option("detach", True)
 
-
-def print_hi(name):
-    # Use a breakpoint in the code line below to debug your script.
-    print(f'Hi, {name}')  # Press Ctrl+F8 to toggle the breakpoint.
-
-
-# Press the green button in the gutter to run the script.
-if __name__ == '__main__':
-    print_hi('PyCharm')
-
-# See PyCharm help at https://www.jetbrains.com/help/pycharm/
+driver = webdriver.Chrome(service=service, options=options)
+driver.get("https://tinder.com/fr")
