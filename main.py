@@ -1,7 +1,7 @@
 from selenium import webdriver
 from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.common.by import By
-from selenium.common.exceptions import NoSuchElementException
+from selenium.common.exceptions import NoSuchElementException, ElementClickInterceptedException
 from selenium.webdriver.common.keys import Keys
 import os
 import time
@@ -16,6 +16,7 @@ options.add_experimental_option("detach", True)
 
 driver = webdriver.Chrome(service=service, options=options)
 driver.get("https://tinder.com/fr")
+driver.maximize_window()
 
 # deny cookies with XPATH
 time.sleep(5)
@@ -85,7 +86,7 @@ except NoSuchElementException:
 else:
     allow_location_button.click()
 
-# dismiss notifications
+# allow notifications
 print("dismiss notifications")
 time.sleep(3)
 try:
@@ -95,4 +96,17 @@ except NoSuchElementException:
 else:
     dismiss_notifications_button.click()
 
+
+# give time to close the pop_up chrome notifications
+time.sleep(10)
+print(driver.title)
+print("catch body")
+body = driver.find_element(By.TAG_NAME, "body")
+body.send_keys(Keys.ARROW_LEFT)
+
+# dislike people
+for n in range(10):
+    time.sleep(5)
+    print(f"{n} people")
+    body.send_keys(Keys.ARROW_LEFT)
 
