@@ -34,7 +34,11 @@ print("select facebook connection")
 facebook_button = driver.find_element(By.XPATH, "//*[@id='q1979629556']/main/div/div/div[1]/div/div/div[3]/span/div[2]/button/div[2]/div[2]")
 facebook_button.click()
 
-
+# catch_up the fb window connection
+base_window = driver.window_handles[0]
+fb_login_window = driver.window_handles[1]
+driver.switch_to.window(fb_login_window)
+print(driver.title)
 
 
 
