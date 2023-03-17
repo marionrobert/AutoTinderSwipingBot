@@ -35,10 +35,36 @@ facebook_button = driver.find_element(By.XPATH, "//*[@id='q1979629556']/main/div
 facebook_button.click()
 
 # catch_up the fb window connection
+time.sleep(3)
+print("switch to fb_window login")
 base_window = driver.window_handles[0]
 fb_login_window = driver.window_handles[1]
 driver.switch_to.window(fb_login_window)
+time.sleep(3)
 print(driver.title)
 
+# deny cookies on fb window
+time.sleep(3)
+print("deny cookies on fb window")
+fb_cookies_buttons = driver.find_elements(By.CSS_SELECTOR, "._9xo5 button")
+# deny_fb_cookies = driver.find_elements(By.XPATH, "//*[@id='facebook']/body/div[2]/div[2]/div/div/div/div/div[3]")
+print(len(fb_cookies_buttons))
+deny_cookies_button = fb_cookies_buttons[0]
+deny_cookies_button.click()
 
+# log_in to fb
+# enter email - username
+time.sleep(3)
+print("looking for and fill out username input")
+email_input = driver.find_element(By.ID, "email")
+email_input.send_keys(FACEBOOK_USERNAME)
+# enter password
+time.sleep(3)
+print("looking for and fill out the password input")
+password_input = driver.find_element(By.ID, "#pass")
+password_input.send_keys(FACEBOOK_PASSWORD)
+# looking for and click on "seconnecter button"*
+print("looking for and click on 'seconnecter' button")
+button_sign_in = driver.find_element(By.NAME, "login")
+button_sign_in.click()
 
